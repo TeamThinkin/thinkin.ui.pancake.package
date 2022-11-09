@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Pancake screen provider class for the UI Pointer
+/// </summary>
 public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
 {
     [SerializeField] private Camera MainCamera;
