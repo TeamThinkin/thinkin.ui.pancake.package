@@ -2,6 +2,8 @@
 
 public class FirstPersonLook : MonoBehaviour
 {
+    public static FirstPersonLook Instance { get; private set; }
+
     [SerializeField]
     Transform character;
     public float sensitivity = 2;
@@ -10,6 +12,14 @@ public class FirstPersonLook : MonoBehaviour
     Vector2 velocity;
     Vector2 frameVelocity;
 
+    public bool IsCursorLocked
+    {
+        get { return Cursor.lockState == CursorLockMode.Locked; }
+        set
+        {
+            Cursor.lockState = value ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+    }
 
     void Reset()
     {
@@ -21,11 +31,12 @@ public class FirstPersonLook : MonoBehaviour
     {
         // Lock the mouse cursor to the game screen.
         Cursor.lockState = CursorLockMode.Locked;
+        Instance = this;
     }
 
     private void toggleCursor()
     {
-        Cursor.lockState = Cursor.lockState == CursorLockMode.Locked ? CursorLockMode.None : CursorLockMode.Locked;
+        IsCursorLocked = !IsCursorLocked;
     }
 
     void Update()

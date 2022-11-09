@@ -15,14 +15,17 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
     public event Action SecondaryButtonStart;
     public event Action SecondaryButtonEnd;
 
+    private Ray ray = new Ray();
+
     public Ray GetRay()
     {
-        return MainCamera.ScreenPointToRay(Input.mousePosition);
-    }
-
-    private void drawRay(Ray ray, Color color)
-    {
-        Debug.DrawRay(ray.origin, ray.direction, color);
+        if (FirstPersonLook.Instance.IsCursorLocked)
+        {
+            ray.origin = MainCamera.transform.position;
+            ray.direction = MainCamera.transform.forward;
+            return ray;
+        }
+        else return MainCamera.ScreenPointToRay(Input.mousePosition);
     }
 
     private void Awake()
@@ -32,6 +35,7 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
 
     private void Update()
     {
+        GetRay().Draw(Color.red);
         if (Input.GetMouseButtonDown(0)) PrimaryButtonStart?.Invoke();
         if (Input.GetMouseButtonUp(0)) PrimaryButtonEnd?.Invoke();
         if (Input.GetMouseButtonDown(1)) SecondaryButtonStart?.Invoke();

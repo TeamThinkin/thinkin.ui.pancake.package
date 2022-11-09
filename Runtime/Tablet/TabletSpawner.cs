@@ -4,8 +4,13 @@ using UnityEngine;
 
 public class TabletSpawner : MonoBehaviour
 {
+    [SerializeField] private GameObject TabletPrefab;
+    [SerializeField] private Transform TabletPose;
+
     public void SpawnTablet()
     {
-        Debug.Log("Spawning tablet...");
+        var tablet = Instantiate(TabletPrefab);
+        tablet.transform.position = TabletPose.position;
+        tablet.transform.rotation = TabletPose.rotation;
     }
 }
