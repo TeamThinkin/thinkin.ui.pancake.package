@@ -9,6 +9,7 @@ using UnityEngine;
 public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
 {
     [SerializeField] private Camera MainCamera;
+    [SerializeField] private GameObject Reticle;
 
     public event Action PrimaryButtonStart;
     public event Action PrimaryButtonEnd;
@@ -40,5 +41,7 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
         if (Input.GetMouseButtonUp(0)) PrimaryButtonEnd?.Invoke();
         if (Input.GetMouseButtonDown(1)) SecondaryButtonStart?.Invoke();
         if (Input.GetMouseButtonUp(1)) SecondaryButtonEnd?.Invoke();
+
+        Reticle.SetActive(FirstPersonLook.Instance.IsCursorLocked);
     }
 }
