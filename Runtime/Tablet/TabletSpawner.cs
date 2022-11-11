@@ -10,6 +10,7 @@ public class TabletSpawner : MonoBehaviour
     public void SpawnTablet()
     {
         var tablet = Instantiate(TabletPrefab);
+        tablet.gameObject.name = "Tablet (" + Time.time.GetHashCode() + ")";
         tablet.transform.position = TabletPose.position;
         tablet.transform.rotation = TabletPose.rotation;
     }
