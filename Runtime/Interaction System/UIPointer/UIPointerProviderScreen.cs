@@ -39,8 +39,10 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
         GetRay().Draw(Color.red);
         if (Input.GetMouseButtonDown(0)) PrimaryButtonStart?.Invoke();
         if (Input.GetMouseButtonUp(0)) PrimaryButtonEnd?.Invoke();
-        if (Input.GetMouseButtonDown(1)) SecondaryButtonStart?.Invoke();
-        if (Input.GetMouseButtonUp(1)) SecondaryButtonEnd?.Invoke();
+        if (Input.GetMouseButtonDown(1)) PrimaryButtonStart?.Invoke();
+        if (Input.GetMouseButtonUp(1)) PrimaryButtonEnd?.Invoke();
+        //if (Input.GetMouseButtonDown(1)) SecondaryButtonStart?.Invoke();
+        //if (Input.GetMouseButtonUp(1)) SecondaryButtonEnd?.Invoke();
 
         Reticle.SetActive(FirstPersonLook.Instance.IsCursorLocked);
     }

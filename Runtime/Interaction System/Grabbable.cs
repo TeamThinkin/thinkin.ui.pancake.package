@@ -27,7 +27,7 @@ public class Grabbable : MonoBehaviour, IGrabbable, IHandlePointerEvent
 
     public void OnGripEnd(IUIPointer Sender)
     {
-    }
+    } 
 
     public void OnGripStart(IUIPointer Sender, RaycastHit RayInfo)
     {

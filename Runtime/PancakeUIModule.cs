@@ -10,7 +10,6 @@ public static class PancakeUIModule
 
     private static void UIManager_OnMakeGrabbable(GameObject Item)
     {
-        Debug.Log("Pancake UI Manager make grabbable", Item);
         Rigidbody body = Item.GetComponent<Rigidbody>();
         if (body == null)
         {
