@@ -4,13 +4,8 @@ public class FirstPersonLook : MonoBehaviour
 {
     public static FirstPersonLook Instance { get; private set; }
 
-    [SerializeField]
-    Transform character;
-    public float sensitivity = 2;
-    public float smoothing = 1.5f;
-
-    Vector2 velocity;
-    Vector2 frameVelocity;
+    [SerializeField] private Transform character;
+    [SerializeField] private float sensitivity = 2;
 
     public bool IsCursorLocked
     {
@@ -29,8 +24,6 @@ public class FirstPersonLook : MonoBehaviour
 
     void Start()
     {
-        // Lock the mouse cursor to the game screen.
-        //Cursor.lockState = CursorLockMode.Locked;
         Instance = this;
     }
 
@@ -39,23 +32,18 @@ public class FirstPersonLook : MonoBehaviour
         IsCursorLocked = !IsCursorLocked;
     }
 
-    void Update()
+    private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab)) toggleCursor();
+        if (Input.GetKeyDown(KeyCode.Tab)) toggleCursor();
         if (Input.GetMouseButtonUp(1)) toggleCursor();
 
         if (Cursor.lockState == CursorLockMode.Locked)
         {
-            // Get smooth velocity.
-            Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y"));
-            Vector2 rawFrameVelocity = Vector2.Scale(mouseDelta, Vector2.one * sensitivity);
-            frameVelocity = Vector2.Lerp(frameVelocity, rawFrameVelocity, 1 / smoothing);
-            velocity += frameVelocity;
-            velocity.y = Mathf.Clamp(velocity.y, -90, 90);
-
+            Vector2 mouseDelta = new Vector2(Input.GetAxisRaw("Mouse X"), Input.GetAxisRaw("Mouse Y")) * sensitivity;
+            
             // Rotate camera up-down and controller left-right from velocity.
-            transform.localRotation = Quaternion.AngleAxis(-velocity.y, Vector3.right);
-            character.localRotation = Quaternion.AngleAxis(velocity.x, Vector3.up);
+            transform.localRotation *= Quaternion.AngleAxis(-mouseDelta.y, Vector3.right);
+            character.localRotation *= Quaternion.AngleAxis(mouseDelta.x, Vector3.up);
         }
     }
 }
