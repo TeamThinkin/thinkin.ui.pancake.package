@@ -46,4 +46,14 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
 
         Reticle.SetActive(FirstPersonLook.Instance.IsCursorLocked);
     }
+
+    #region -- Unused Pointer Provider Events --
+#pragma warning disable IDE0051 // Remove unused private members
+    private void supressUnusedMessage()
+    {
+        SecondaryButtonStart?.Invoke();
+        SecondaryButtonEnd?.Invoke();
+    }
+#pragma warning restore IDE0051 // Remove unused private members
+    #endregion
 }
