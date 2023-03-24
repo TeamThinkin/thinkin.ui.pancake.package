@@ -15,6 +15,7 @@ public class TabletSpawner : MonoBehaviour
         {
             tabletInstance = Instantiate(TabletPrefab).GetComponent<Tablet>();
             tabletInstance.gameObject.name = "Tablet (" + Time.time.GetHashCode() + ")";
+            DontDestroyOnLoad(tabletInstance);
         }
         else tabletInstance.gameObject.SetActive(true);
 
