@@ -36,11 +36,15 @@ public class UIPointerProviderScreen : MonoBehaviour, IUIPointerProvider
 
     private void Update()
     {
-        GetRay().Draw(Color.red);
-        if (Input.GetMouseButtonDown(0)) PrimaryButtonStart?.Invoke();
+        if (Input.GetMouseButtonDown(0))
+        {
+            Debug.Log("Mouse down");
+            PrimaryButtonStart?.Invoke();
+        }
+
         if (Input.GetMouseButtonUp(0)) PrimaryButtonEnd?.Invoke();
-        if (Input.GetMouseButtonDown(1)) PrimaryButtonStart?.Invoke();
-        if (Input.GetMouseButtonUp(1)) PrimaryButtonEnd?.Invoke();
+        //if (Input.GetMouseButtonDown(1)) PrimaryButtonStart?.Invoke();
+        //if (Input.GetMouseButtonUp(1)) PrimaryButtonEnd?.Invoke();
         //if (Input.GetMouseButtonDown(1)) SecondaryButtonStart?.Invoke();
         //if (Input.GetMouseButtonUp(1)) SecondaryButtonEnd?.Invoke();
 
